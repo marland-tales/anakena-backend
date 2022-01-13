@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+//Entity eh a anotacao do Spring utilizada para definir a classe de dominio;
 
 public class Categoria implements Serializable{
 	private static final long serialVersionUID = 1L;
