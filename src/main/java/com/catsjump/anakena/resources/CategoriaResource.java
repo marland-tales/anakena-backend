@@ -1,37 +1,33 @@
 package com.catsjump.anakena.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.catsjump.anakena.domain.Categoria;
+import com.catsjump.anakena.services.CategoriaService;
 
 @RestController
 //RequestController eh uma anotacao do Spring usada para gerenciar controladores REST
 
 @RequestMapping(value="/categorias")
 //RequestMapping eh usado para definir o endpoint
-
 public class CategoriaResource {
 	
-	@RequestMapping(method=RequestMethod.GET)
+	@Autowired
+	private CategoriaService service;
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 //existem metodos do RequestMapping, por exemplo o Method que eh usado para definir o verbo/metodo
-	public 	List<Categoria> listar () {
-		
-		Categoria cat1 = new Categoria(1, "Informatica");
-		Categoria cat2 = new Categoria(2, "Escritório");
-		
-		List<Categoria> lista = new ArrayList<>();
-		lista.add(cat1);
-		lista.add(cat2);
-		
-		return lista;
-		
-		
-		
+	public ResponseEntity<?> find (@PathVariable Integer id)  {
+//ResponseEntity tipo especial do Spring que encapsula varias informacoes de resposta HTTP para um servico REST
+//@PathVariable anotacao Spring para capturar o valor recebido no path e setar como argumento do metodo
+		Categoria obj = service.find(id);
+		return ResponseEntity.ok().body(obj);
+				
 	}
 
 }
