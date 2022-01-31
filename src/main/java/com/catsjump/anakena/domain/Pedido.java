@@ -22,10 +22,12 @@ public class Pedido implements Serializable {
 	private Date instante;
 
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
+//cascadeType eh uma peculiaridade do JPA, erro de entidade transiente quando vai salvar um pedido/pagamento 
 	private Pagamento pagamento;
 
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
+//@manyToOne permite determinar o tipo de relacionamento e @JoinColumns determina a FK 
 	private Cliente cliente;
 
 	@ManyToOne

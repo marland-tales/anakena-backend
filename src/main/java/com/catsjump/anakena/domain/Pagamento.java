@@ -14,6 +14,7 @@ import com.catsjump.anakena.domain.enums.EstadoPagamento;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
+//abstract garante que nao seja possivel instanciar diretamente objetos do tipo Pagamento, obriga que seja criado a partir da subclasses, por exemplo: Pagamento pagto1 = new PagamentoComCartao
 public abstract class Pagamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -24,6 +25,7 @@ public abstract class Pagamento implements Serializable {
 	@OneToOne
 	@JoinColumn(name="pedido_id")
 	@MapsId
+//mapeamento do atributo pedido referenciando que o Id do Pagamento assume o Id do Pedido - usando @OneToOne, @joinColumn e @MapsId 
 	private Pedido pedido;
 
 	public Pagamento() {
