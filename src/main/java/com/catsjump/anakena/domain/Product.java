@@ -15,7 +15,7 @@ import javax.persistence.ManyToMany;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-public class Produto implements Serializable{
+public class Product implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -25,20 +25,20 @@ public class Produto implements Serializable{
 	private Double preco; 
 	
 	@JsonBackReference
-//do outro lado da associacao, ja foram buscados os objetos, entao neste caso ira omitir a lista de categorias para cada produto
+//do outro lado da associacao, ja foram buscados os objetos, entao neste caso ira omitir a lista de categories para cada product
 	@ManyToMany
 //para tratar relacao N para N, um dos lados (alguma das classes de dominio) deve conter essa anotacao
 	@JoinTable(name = "PRODUTO_CATEGORIA",
-	 joinColumns = @JoinColumn(name = "produto_id"),
-	 inverseJoinColumns = @JoinColumn(name = "categoria_id")
+	 joinColumns = @JoinColumn(name = "product_id"),
+	 inverseJoinColumns = @JoinColumn(name = "category_id")
 	 )
 	
-	private List<Categoria> categorias = new ArrayList<>();
+	private List<Category> categories = new ArrayList<>();
 	
-	public Produto() {	
+	public Product() {	
 	}
 
-	public Produto(Integer id, String nome, Double preco) {
+	public Product(Integer id, String nome, Double preco) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -69,12 +69,12 @@ public class Produto implements Serializable{
 		this.preco = preco;
 	}
 
-	public List<Categoria> getCategorias() {
-		return categorias;
+	public List<Category> getCategories() {
+		return categories;
 	}
 
-	public void setCategorias(List<Categoria> categorias) {
-		this.categorias = categorias;
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class Produto implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Produto other = (Produto) obj;
+		Product other = (Product) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

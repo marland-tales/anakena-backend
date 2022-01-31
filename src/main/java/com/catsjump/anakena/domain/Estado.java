@@ -23,7 +23,7 @@ private String nome;
 
 @JsonBackReference
 @OneToMany(mappedBy="estado")
-private List<Cidade> cidades = new ArrayList<>();
+private List<City> cities = new ArrayList<>();
 
 public Estado() {
 }
@@ -50,12 +50,12 @@ public void setNome(String nome) {
 	this.nome = nome;
 }
 
-public List<Cidade> getCidades() {
-	return cidades;
+public List<City> getCitys() {
+	return cities;
 }
 
-public void setCidades(List<Cidade> cidades) {
-	this.cidades = cidades;
+public void setCitys(List<City> cities) {
+	this.cities = cities;
 }
 
 public static long getSerialversionuid() {
@@ -66,7 +66,7 @@ public static long getSerialversionuid() {
 public int hashCode() {
 	final int prime = 31;
 	int result = 1;
-	result = prime * result + ((cidades == null) ? 0 : cidades.hashCode());
+	result = prime * result + ((cities == null) ? 0 : cities.hashCode());
 	result = prime * result + ((id == null) ? 0 : id.hashCode());
 	return result;
 }
@@ -80,10 +80,10 @@ public boolean equals(Object obj) {
 	if (getClass() != obj.getClass())
 		return false;
 	Estado other = (Estado) obj;
-	if (cidades == null) {
-		if (other.cidades != null)
+	if (cities == null) {
+		if (other.cities != null)
 			return false;
-	} else if (!cidades.equals(other.cidades))
+	} else if (!cities.equals(other.cities))
 		return false;
 	if (id == null) {
 		if (other.id != null)

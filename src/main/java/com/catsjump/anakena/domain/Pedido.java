@@ -28,7 +28,7 @@ public class Pedido implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 //@manyToOne permite determinar o tipo de relacionamento e @JoinColumns determina a FK 
-	private Cliente cliente;
+	private Customer customer;
 
 	@ManyToOne
 	@JoinColumn(name="endereco_de_entrega_id")
@@ -37,11 +37,11 @@ public class Pedido implements Serializable {
 	public Pedido() {
 	}
 
-	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
+	public Pedido(Integer id, Date instante, Customer customer, Endereco enderecoDeEntrega) {
 		super();
 		this.id = id;
 		this.instante = instante;
-		this.cliente = cliente;
+		this.customer = customer;
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
 
@@ -69,12 +69,12 @@ public class Pedido implements Serializable {
 		this.pagamento = pagamento;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public Customer getCliente() {
+		return customer;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setCliente(Customer customer) {
+		this.customer = customer;
 	}
 
 	public Endereco getEnderecoDeEntrega() {

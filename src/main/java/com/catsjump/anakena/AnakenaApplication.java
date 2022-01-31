@@ -8,44 +8,44 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.catsjump.anakena.domain.Categoria;
-import com.catsjump.anakena.domain.Cidade;
-import com.catsjump.anakena.domain.Cliente;
+import com.catsjump.anakena.domain.Category;
+import com.catsjump.anakena.domain.City;
+import com.catsjump.anakena.domain.Customer;
 import com.catsjump.anakena.domain.Endereco;
 import com.catsjump.anakena.domain.Estado;
 import com.catsjump.anakena.domain.Pagamento;
 import com.catsjump.anakena.domain.PagamentoComBoleto;
 import com.catsjump.anakena.domain.PagamentoComCartao;
 import com.catsjump.anakena.domain.Pedido;
-import com.catsjump.anakena.domain.Produto;
+import com.catsjump.anakena.domain.Product;
 import com.catsjump.anakena.domain.enums.EstadoPagamento;
 import com.catsjump.anakena.domain.enums.TipoCliente;
-import com.catsjump.anakena.repositories.CategoriaRepository;
-import com.catsjump.anakena.repositories.CidadeRepository;
-import com.catsjump.anakena.repositories.ClienteRepository;
+import com.catsjump.anakena.repositories.CategoryRepository;
+import com.catsjump.anakena.repositories.CityRepository;
+import com.catsjump.anakena.repositories.CustomerRepository;
 import com.catsjump.anakena.repositories.EnderecoRepository;
 import com.catsjump.anakena.repositories.EstadoRepository;
 import com.catsjump.anakena.repositories.PagamentoRepository;
 import com.catsjump.anakena.repositories.PedidoRepository;
-import com.catsjump.anakena.repositories.ProdutoRepository;
+import com.catsjump.anakena.repositories.ProductRepository;
 
 @SpringBootApplication
 public class AnakenaApplication implements CommandLineRunner {
 
 	@Autowired
-	private CategoriaRepository categoriaRepository;
+	private CategoryRepository categoryRepository;
 	
 	@Autowired
-	private ProdutoRepository produtoRepository;
+	private ProductRepository productRepository;
 	
 	@Autowired
 	private EstadoRepository estadoRepository;
 	
 	@Autowired
-	private CidadeRepository cidadeRepository;
+	private CityRepository cityRepository;
 	
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private CustomerRepository clienteRepository;
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
@@ -65,40 +65,40 @@ public class AnakenaApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 //instanciando categorias
-		Categoria cat1 = new Categoria(null, "Informatica");
-		Categoria cat2 = new Categoria(null, "Escritorio");
+		Category cat1 = new Category(null, "Informatica");
+		Category cat2 = new Category(null, "Escritorio");
 	
-//instanciando produtos
-		Produto p1 = new Produto(null, "Computador", 2000.00);
-		Produto p2 = new Produto(null, "Impressora", 800.00);
-		Produto p3 = new Produto(null, "Mouse", 80.00);
+//instanciando products
+		Product p1 = new Product(null, "Computador", 2000.00);
+		Product p2 = new Product(null, "Impressora", 800.00);
+		Product p3 = new Product(null, "Mouse", 80.00);
 		
-		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
-		cat2.getProdutos().addAll(Arrays.asList(p2));
+		cat1.getProducts().addAll(Arrays.asList(p1, p2, p3));
+		cat2.getProducts().addAll(Arrays.asList(p2));
 		
-		p1.getCategorias().addAll(Arrays.asList(cat1));
-		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
-		p3.getCategorias().addAll(Arrays.asList(cat1));
+		p1.getCategories().addAll(Arrays.asList(cat1));
+		p2.getCategories().addAll(Arrays.asList(cat1, cat2));
+		p3.getCategories().addAll(Arrays.asList(cat1));
 
-		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
-		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
+		productRepository.saveAll(Arrays.asList(p1, p2, p3));
 
 //instanciando Estado
 		Estado est1 = new Estado(null, "Minas Gerais");
 		Estado est2 = new Estado(null, "São Paulo");
 		
-//instanciando Cidade		
-		Cidade c1 = new Cidade(null, "Uberlandia", est1);
-		Cidade c2 = new Cidade(null, "São Paulo", est2);
-		Cidade c3 = new Cidade(null, "Campinhas", est2);
+//instanciando City		
+		City c1 = new City(null, "Uberlandia", est1);
+		City c2 = new City(null, "São Paulo", est2);
+		City c3 = new City(null, "Campinhas", est2);
 		
-		est1.getCidades().addAll(Arrays.asList(c1));
-		est2.getCidades().addAll(Arrays.asList(c2,c3));
+		est1.getCitys().addAll(Arrays.asList(c1));
+		est2.getCitys().addAll(Arrays.asList(c2,c3));
 		
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
-		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+		cityRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
-		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
+		Customer cli1 = new Customer(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
 
 		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 

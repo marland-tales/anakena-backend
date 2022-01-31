@@ -18,7 +18,7 @@ import com.catsjump.anakena.domain.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-public class Cliente implements Serializable {
+public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -31,20 +31,20 @@ public class Cliente implements Serializable {
 	private Integer tipo;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy="cliente")
+	@OneToMany(mappedBy="customer")
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	@ElementCollection
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 
-	@OneToMany(mappedBy="cliente")
+	@OneToMany(mappedBy="customer")
 	private List<Pedido> pedidos = new ArrayList<>();
 	
-	public Cliente() {
+	public Customer() {
 	}
 
-	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
+	public Customer(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -134,7 +134,7 @@ public class Cliente implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cliente other = (Cliente) obj;
+		Customer other = (Customer) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
