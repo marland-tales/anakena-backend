@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.catsjump.anakena.domain.Category;
 import com.catsjump.anakena.domain.City;
 import com.catsjump.anakena.domain.Customer;
-import com.catsjump.anakena.domain.Endereco;
+import com.catsjump.anakena.domain.Address;
 import com.catsjump.anakena.domain.Estado;
 import com.catsjump.anakena.domain.Pagamento;
 import com.catsjump.anakena.domain.PagamentoComBoleto;
@@ -23,7 +23,7 @@ import com.catsjump.anakena.domain.enums.TipoCliente;
 import com.catsjump.anakena.repositories.CategoryRepository;
 import com.catsjump.anakena.repositories.CityRepository;
 import com.catsjump.anakena.repositories.CustomerRepository;
-import com.catsjump.anakena.repositories.EnderecoRepository;
+import com.catsjump.anakena.repositories.AddressRepository;
 import com.catsjump.anakena.repositories.EstadoRepository;
 import com.catsjump.anakena.repositories.PagamentoRepository;
 import com.catsjump.anakena.repositories.PedidoRepository;
@@ -48,7 +48,7 @@ public class AnakenaApplication implements CommandLineRunner {
 	private CustomerRepository clienteRepository;
 	
 	@Autowired
-	private EnderecoRepository enderecoRepository;
+	private AddressRepository addressRepository;
 	
 	@Autowired
 	private PedidoRepository pedidoRepository;
@@ -102,14 +102,14 @@ public class AnakenaApplication implements CommandLineRunner {
 
 		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 
-//instanciando Endereco
-		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);
-		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+//instanciando Address
+		Address e1 = new Address(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);
+		Address e2 = new Address(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
 
-		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		cli1.getAddresses().addAll(Arrays.asList(e1, e2));
 
 		clienteRepository.saveAll(Arrays.asList(cli1));
-		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		addressRepository.saveAll(Arrays.asList(e1, e2));
 	
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy HH:mm");
 

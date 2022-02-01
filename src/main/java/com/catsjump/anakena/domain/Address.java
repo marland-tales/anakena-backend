@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-public class Endereco implements Serializable {
+public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -33,10 +33,10 @@ public class Endereco implements Serializable {
 	@JoinColumn(name="city_id")
 	private City city;
 
-	public Endereco() {
+	public Address() {
 	}
 
-	public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep,
+	public Address(Integer id, String logradouro, String numero, String complemento, String bairro, String cep,
 			Customer customer, City city) {
 		super();
 		this.id = id;
@@ -129,7 +129,7 @@ public class Endereco implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Endereco other = (Endereco) obj;
+		Address other = (Address) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

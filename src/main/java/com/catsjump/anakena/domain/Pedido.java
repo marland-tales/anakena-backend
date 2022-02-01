@@ -32,17 +32,17 @@ public class Pedido implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name="endereco_de_entrega_id")
-	private Endereco enderecoDeEntrega;
+	private Address deliveryAddress;
 
 	public Pedido() {
 	}
 
-	public Pedido(Integer id, Date instante, Customer customer, Endereco enderecoDeEntrega) {
+	public Pedido(Integer id, Date instante, Customer customer, Address deliveryAddress) {
 		super();
 		this.id = id;
 		this.instante = instante;
 		this.customer = customer;
-		this.enderecoDeEntrega = enderecoDeEntrega;
+		this.deliveryAddress = deliveryAddress;
 	}
 
 	public Integer getId() {
@@ -77,12 +77,12 @@ public class Pedido implements Serializable {
 		this.customer = customer;
 	}
 
-	public Endereco getEnderecoDeEntrega() {
-		return enderecoDeEntrega;
+	public Address getDeliveryAddress() {
+		return deliveryAddress;
 	}
 
-	public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
-		this.enderecoDeEntrega = enderecoDeEntrega;
+	public void setDeliveryAddress(Address deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
 	}
 
 	@Override

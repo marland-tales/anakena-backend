@@ -32,7 +32,7 @@ public class Customer implements Serializable {
 
 	@JsonManagedReference
 	@OneToMany(mappedBy="customer")
-	private List<Endereco> enderecos = new ArrayList<>();
+	private List<Address> addresses = new ArrayList<>();
 
 	@ElementCollection
 	@CollectionTable(name="TELEFONE")
@@ -93,12 +93,12 @@ public class Customer implements Serializable {
 		this.tipo = tipo.getCod();
 	}
 
-	public List<Endereco> getEnderecos() {
-		return enderecos;
+	public List<Address> getAddresses() {
+		return addresses;
 	}
 
-	public void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 
 	public Set<String> getTelefones() {
