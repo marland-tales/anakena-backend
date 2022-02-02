@@ -12,21 +12,21 @@ import com.catsjump.anakena.domain.Category;
 import com.catsjump.anakena.domain.City;
 import com.catsjump.anakena.domain.Customer;
 import com.catsjump.anakena.domain.Address;
-import com.catsjump.anakena.domain.Estado;
-import com.catsjump.anakena.domain.Pagamento;
-import com.catsjump.anakena.domain.PagamentoComBoleto;
-import com.catsjump.anakena.domain.PagamentoComCartao;
-import com.catsjump.anakena.domain.Pedido;
+import com.catsjump.anakena.domain.State;
+import com.catsjump.anakena.domain.Payment;
+import com.catsjump.anakena.domain.SlipPayment;
+import com.catsjump.anakena.domain.CardPayment;
+import com.catsjump.anakena.domain.CustomerOrder;
 import com.catsjump.anakena.domain.Product;
-import com.catsjump.anakena.domain.enums.EstadoPagamento;
+import com.catsjump.anakena.domain.enums.PaymentStatus;
 import com.catsjump.anakena.domain.enums.TipoCliente;
 import com.catsjump.anakena.repositories.CategoryRepository;
 import com.catsjump.anakena.repositories.CityRepository;
 import com.catsjump.anakena.repositories.CustomerRepository;
 import com.catsjump.anakena.repositories.AddressRepository;
-import com.catsjump.anakena.repositories.EstadoRepository;
-import com.catsjump.anakena.repositories.PagamentoRepository;
-import com.catsjump.anakena.repositories.PedidoRepository;
+import com.catsjump.anakena.repositories.StateRepository;
+import com.catsjump.anakena.repositories.PaymentRepository;
+import com.catsjump.anakena.repositories.CustomerOrderRepository;
 import com.catsjump.anakena.repositories.ProductRepository;
 
 @SpringBootApplication
@@ -39,7 +39,7 @@ public class AnakenaApplication implements CommandLineRunner {
 	private ProductRepository productRepository;
 	
 	@Autowired
-	private EstadoRepository estadoRepository;
+	private StateRepository stateRepository;
 	
 	@Autowired
 	private CityRepository cityRepository;
@@ -51,10 +51,10 @@ public class AnakenaApplication implements CommandLineRunner {
 	private AddressRepository addressRepository;
 	
 	@Autowired
-	private PedidoRepository pedidoRepository;
+	private CustomerOrderRepository pedidoRepository;
 	
 	@Autowired
-	private PagamentoRepository pagamentoRepository;
+	private PaymentRepository paymentRepository;
 	
 	
 	public static void main(String[] args) {
@@ -83,9 +83,9 @@ public class AnakenaApplication implements CommandLineRunner {
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
 		productRepository.saveAll(Arrays.asList(p1, p2, p3));
 
-//instanciando Estado
-		Estado est1 = new Estado(null, "Minas Gerais");
-		Estado est2 = new Estado(null, "São Paulo");
+//instanciando State
+		State est1 = new State(null, "Minas Gerais");
+		State est2 = new State(null, "São Paulo");
 		
 //instanciando City		
 		City c1 = new City(null, "Uberlandia", est1);
@@ -95,7 +95,7 @@ public class AnakenaApplication implements CommandLineRunner {
 		est1.getCitys().addAll(Arrays.asList(c1));
 		est2.getCitys().addAll(Arrays.asList(c2,c3));
 		
-		estadoRepository.saveAll(Arrays.asList(est1, est2));
+		stateRepository.saveAll(Arrays.asList(est1, est2));
 		cityRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
 		Customer cli1 = new Customer(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
@@ -113,20 +113,20 @@ public class AnakenaApplication implements CommandLineRunner {
 	
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy HH:mm");
 
-		Pedido ped1 = new Pedido(null, sdf.parse("21/12/2021 10:32"), cli1, e1);
-		Pedido ped2 = new Pedido(null, sdf.parse("23/12/2021 19:35"), cli1, e2);
+		CustomerOrder ped1 = new CustomerOrder(null, sdf.parse("21/12/2021 10:32"), cli1, e1);
+		CustomerOrder ped2 = new CustomerOrder(null, sdf.parse("23/12/2021 19:35"), cli1, e2);
 
-		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
-//pagamento do ped1 eh o pagto1:
+		Payment pagto1 = new CardPayment(null, PaymentStatus.QUITADO, ped1, 6);
+//payment do ped1 eh o pagto1:
 		ped1.setPagamento(pagto1);
 
-		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2017 00:00"), null);
+		Payment pagto2 = new SlipPayment(null, PaymentStatus.PENDENTE, ped2, sdf.parse("20/10/2017 00:00"), null);
 		ped2.setPagamento(pagto2);
 
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
-		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		paymentRepository.saveAll(Arrays.asList(pagto1, pagto2));
 //
 	}
 }

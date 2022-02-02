@@ -2,18 +2,18 @@ package com.catsjump.anakena.domain;
 
 import javax.persistence.Entity;
 
-import com.catsjump.anakena.domain.enums.EstadoPagamento;
+import com.catsjump.anakena.domain.enums.PaymentStatus;
 
 @Entity
-public class PagamentoComCartao extends Pagamento {
+public class CardPayment extends Payment {
 	private static final long serialVersionUID = 1L;
 
 	private Integer numeroDeParcelas;
 
-	public PagamentoComCartao() {
+	public CardPayment() {
 	}
 
-	public PagamentoComCartao(Integer id, EstadoPagamento estado, Pedido pedido, Integer numeroDeParcelas) {
+	public CardPayment(Integer id, PaymentStatus estado, CustomerOrder pedido, Integer numeroDeParcelas) {
 		super(id, estado, pedido);
 		this.numeroDeParcelas = numeroDeParcelas;
 	}

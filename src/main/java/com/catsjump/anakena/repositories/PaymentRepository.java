@@ -3,11 +3,11 @@ package com.catsjump.anakena.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.catsjump.anakena.domain.Pagamento;
+import com.catsjump.anakena.domain.Payment;
 
 @Repository
 //Repository eh uma anotacao do Spring que abstrai o uso do JPA
 
-public interface PagamentoRepository extends JpaRepository<Pagamento, Integer> {
+public interface PaymentRepository extends JpaRepository<Payment, Integer> {
 	
 }

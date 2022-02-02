@@ -1,6 +1,6 @@
 package com.catsjump.anakena.domain.enums;
 
-public enum EstadoPagamento {
+public enum PaymentStatus {
 
 	PENDENTE(1, "Pendente"),
 	QUITADO(2, "Quitado"),
@@ -9,7 +9,7 @@ public enum EstadoPagamento {
 	private int cod;
 	private String descricao;
 
-	private EstadoPagamento(int cod, String descricao) {
+	private PaymentStatus(int cod, String descricao) {
 		this.cod = cod;
 		this.descricao = descricao;
 	}
@@ -22,13 +22,13 @@ public enum EstadoPagamento {
 		return descricao;
 	}
 
-	public static EstadoPagamento toEnum(Integer cod) {
+	public static PaymentStatus toEnum(Integer cod) {
 
 		if (cod == null) {
 			return null;
 		}
 
-		for (EstadoPagamento x : EstadoPagamento.values()) {
+		for (PaymentStatus x : PaymentStatus.values()) {
 			if (cod.equals(x.getCod())) {
 				return x;
 			}

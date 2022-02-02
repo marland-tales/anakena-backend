@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-public class Estado implements Serializable {
+public class State implements Serializable {
 private static final long serialVersionUID = 1L;
 
 @Id
@@ -22,13 +22,13 @@ private Integer id;
 private String nome;
 
 @JsonBackReference
-@OneToMany(mappedBy="estado")
+@OneToMany(mappedBy="state")
 private List<City> cities = new ArrayList<>();
 
-public Estado() {
+public State() {
 }
 
-public Estado(Integer id, String nome) {
+public State(Integer id, String nome) {
 	super();
 	this.id = id;
 	this.nome = nome;
@@ -79,7 +79,7 @@ public boolean equals(Object obj) {
 		return false;
 	if (getClass() != obj.getClass())
 		return false;
-	Estado other = (Estado) obj;
+	State other = (State) obj;
 	if (cities == null) {
 		if (other.cities != null)
 			return false;

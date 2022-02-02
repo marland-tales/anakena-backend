@@ -10,31 +10,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
-import com.catsjump.anakena.domain.enums.EstadoPagamento;
+import com.catsjump.anakena.domain.enums.PaymentStatus;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 //abstract garante que nao seja possivel instanciar diretamente objetos do tipo Pagamento, obriga que seja criado a partir da subclasses, por exemplo: Pagamento pagto1 = new PagamentoComCartao
-public abstract class Pagamento implements Serializable {
+public abstract class Payment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private Integer id;
-	private Integer estado;
+	private Integer status;
 
 	@OneToOne
 	@JoinColumn(name="pedido_id")
 	@MapsId
 //mapeamento do atributo pedido referenciando que o Id do Pagamento assume o Id do Pedido - usando @OneToOne, @joinColumn e @MapsId 
-	private Pedido pedido;
+	private CustomerOrder pedido;
 
-	public Pagamento() {
+	public Payment() {
 	}
 
-	public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
+	public Payment(Integer id, PaymentStatus status, CustomerOrder pedido) {
 		super();
 		this.id = id;
-		this.estado = estado.getCod();
+		this.status = status.getCod();
 		this.pedido = pedido;
 	}
 
@@ -46,19 +46,19 @@ public abstract class Pagamento implements Serializable {
 		this.id = id;
 	}
 
-	public EstadoPagamento getEstado() {
-		return EstadoPagamento.toEnum(estado);
+	public PaymentStatus getEstado() {
+		return PaymentStatus.toEnum(status);
 	}
 
-	public void setEstado(EstadoPagamento estado) {
-		this.estado = estado.getCod();
+	public void setEstado(PaymentStatus status) {
+		this.status = status.getCod();
 	}
 
-	public Pedido getPedido() {
+	public CustomerOrder getPedido() {
 		return pedido;
 	}
 
-	public void setPedido(Pedido pedido) {
+	public void setPedido(CustomerOrder pedido) {
 		this.pedido = pedido;
 	}
 
@@ -78,7 +78,7 @@ public abstract class Pagamento implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pagamento other = (Pagamento) obj;
+		Payment other = (Payment) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

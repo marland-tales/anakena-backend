@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Pedido implements Serializable {
+public class CustomerOrder implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,7 +23,7 @@ public class Pedido implements Serializable {
 
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
 //cascadeType eh uma peculiaridade do JPA, erro de entidade transiente quando vai salvar um pedido/pagamento 
-	private Pagamento pagamento;
+	private Payment pagamento;
 
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
@@ -34,10 +34,10 @@ public class Pedido implements Serializable {
 	@JoinColumn(name="endereco_de_entrega_id")
 	private Address deliveryAddress;
 
-	public Pedido() {
+	public CustomerOrder() {
 	}
 
-	public Pedido(Integer id, Date instante, Customer customer, Address deliveryAddress) {
+	public CustomerOrder(Integer id, Date instante, Customer customer, Address deliveryAddress) {
 		super();
 		this.id = id;
 		this.instante = instante;
@@ -61,11 +61,11 @@ public class Pedido implements Serializable {
 		this.instante = instante;
 	}
 
-	public Pagamento getPagamento() {
+	public Payment getPagamento() {
 		return pagamento;
 	}
 
-	public void setPagamento(Pagamento pagamento) {
+	public void setPagamento(Payment pagamento) {
 		this.pagamento = pagamento;
 	}
 
@@ -101,7 +101,7 @@ public class Pedido implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pedido other = (Pedido) obj;
+		CustomerOrder other = (CustomerOrder) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
