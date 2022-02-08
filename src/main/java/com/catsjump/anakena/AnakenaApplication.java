@@ -8,26 +8,28 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.catsjump.anakena.domain.Address;
+import com.catsjump.anakena.domain.CardPayment;
 import com.catsjump.anakena.domain.Category;
 import com.catsjump.anakena.domain.City;
 import com.catsjump.anakena.domain.Customer;
-import com.catsjump.anakena.domain.Address;
-import com.catsjump.anakena.domain.State;
-import com.catsjump.anakena.domain.Payment;
-import com.catsjump.anakena.domain.SlipPayment;
-import com.catsjump.anakena.domain.CardPayment;
 import com.catsjump.anakena.domain.CustomerOrder;
+import com.catsjump.anakena.domain.OrderItem;
+import com.catsjump.anakena.domain.Payment;
 import com.catsjump.anakena.domain.Product;
+import com.catsjump.anakena.domain.SlipPayment;
+import com.catsjump.anakena.domain.State;
 import com.catsjump.anakena.domain.enums.PaymentStatus;
 import com.catsjump.anakena.domain.enums.TipoCliente;
+import com.catsjump.anakena.repositories.AddressRepository;
 import com.catsjump.anakena.repositories.CategoryRepository;
 import com.catsjump.anakena.repositories.CityRepository;
-import com.catsjump.anakena.repositories.CustomerRepository;
-import com.catsjump.anakena.repositories.AddressRepository;
-import com.catsjump.anakena.repositories.StateRepository;
-import com.catsjump.anakena.repositories.PaymentRepository;
 import com.catsjump.anakena.repositories.CustomerOrderRepository;
+import com.catsjump.anakena.repositories.CustomerRepository;
+import com.catsjump.anakena.repositories.OrderItemRepository;
+import com.catsjump.anakena.repositories.PaymentRepository;
 import com.catsjump.anakena.repositories.ProductRepository;
+import com.catsjump.anakena.repositories.StateRepository;
 
 @SpringBootApplication
 public class AnakenaApplication implements CommandLineRunner {
@@ -55,6 +57,9 @@ public class AnakenaApplication implements CommandLineRunner {
 	
 	@Autowired
 	private PaymentRepository paymentRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 	
 	public static void main(String[] args) {
@@ -128,5 +133,19 @@ public class AnakenaApplication implements CommandLineRunner {
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		paymentRepository.saveAll(Arrays.asList(pagto1, pagto2));
 //
+		
+		OrderItem ip1 = new OrderItem(ped1, p1, 0.00, 1, 2000.00);
+		OrderItem ip2 = new OrderItem(ped1, p3, 0.00, 2, 80.00);
+		OrderItem ip3 = new OrderItem(ped2, p2, 100.00, 1, 800.00);
+
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+
+		orderItemRepository.saveAll(Arrays.asList(ip1, ip2, ip3));		
+		
 	}
 }
