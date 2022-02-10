@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -20,7 +21,7 @@ private static final long serialVersionUID = 1L;
 private Integer id;
 private String nome;
 
-@JsonManagedReference
+@JsonIgnore
 @ManyToOne
 @JoinColumn(name="state_id")
 private State state;

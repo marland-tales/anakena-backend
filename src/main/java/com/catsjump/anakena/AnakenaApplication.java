@@ -123,10 +123,10 @@ public class AnakenaApplication implements CommandLineRunner {
 
 		Payment pagto1 = new CardPayment(null, PaymentStatus.QUITADO, ped1, 6);
 //payment do ped1 eh o pagto1:
-		ped1.setPagamento(pagto1);
+		ped1.setPayment(pagto1);
 
 		Payment pagto2 = new SlipPayment(null, PaymentStatus.PENDENTE, ped2, sdf.parse("20/10/2017 00:00"), null);
-		ped2.setPagamento(pagto2);
+		ped2.setPayment(pagto2);
 
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 

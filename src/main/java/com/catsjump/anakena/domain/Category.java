@@ -23,7 +23,6 @@ public class Category implements Serializable{
 	private Integer id;
 	private String nome;
 	
-	@JsonManagedReference
 //gerencia a referencia - pacote jackson - deve ser feito no lado que deseja que venha os objetos associados
 	@ManyToMany(mappedBy="categories")	
 	private List<Product> products = new ArrayList<>();

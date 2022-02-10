@@ -11,6 +11,7 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.catsjump.anakena.domain.enums.PaymentStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -22,11 +23,12 @@ public abstract class Payment implements Serializable {
 	private Integer id;
 	private Integer status;
 
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name="pedido_id")
 	@MapsId
 //mapeamento do atributo pedido referenciando que o Id do Pagamento assume o Id do Pedido - usando @OneToOne, @joinColumn e @MapsId 
-	private CustomerOrder pedido;
+	private CustomerOrder customerOrder;
 
 	public Payment() {
 	}
@@ -35,7 +37,7 @@ public abstract class Payment implements Serializable {
 		super();
 		this.id = id;
 		this.status = status.getCod();
-		this.pedido = pedido;
+		this.customerOrder = pedido;
 	}
 
 	public Integer getId() {
@@ -54,12 +56,12 @@ public abstract class Payment implements Serializable {
 		this.status = status.getCod();
 	}
 
-	public CustomerOrder getPedido() {
-		return pedido;
+	public CustomerOrder getCustomerOrder() {
+		return customerOrder;
 	}
 
-	public void setPedido(CustomerOrder pedido) {
-		this.pedido = pedido;
+	public void setPedido(CustomerOrder customerOrder) {
+		this.customerOrder = customerOrder;
 	}
 
 	@Override

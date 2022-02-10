@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class CustomerOrder implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,16 +25,20 @@ public class CustomerOrder implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	@JsonFormat(pattern="dd/mm/yyyy hh:mm")
 	private Date instante;
 
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
-//cascadeType eh uma peculiaridade do JPA, erro de entidade transiente quando vai salvar um pedido/pagamento 
-	private Payment pagamento;
+	@JsonManagedReference
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="customerOrder")
+//cascadeType eh uma peculiaridade do JPA, erro de entidade transiente quando vai salvar um pedido/payment 
+	private Payment payment;
 
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
-//@manyToOne permite determinar o tipo de relacionamento e @JoinColumns determina a FK 
 	private Customer customer;
+//@manyToOne permite determinar o tipo de relacionamento e @JoinColumns determina a FK 
 
 	@ManyToOne
 	@JoinColumn(name="endereco_de_entrega_id")
@@ -67,12 +74,12 @@ public class CustomerOrder implements Serializable {
 		this.instante = instante;
 	}
 
-	public Payment getPagamento() {
-		return pagamento;
+	public Payment getPayment() {
+		return payment;
 	}
 
-	public void setPagamento(Payment pagamento) {
-		this.pagamento = pagamento;
+	public void setPayment(Payment payment) {
+		this.payment = payment;
 	}
 
 	public Customer getCliente() {
