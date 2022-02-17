@@ -22,7 +22,7 @@ public class CustomerOrderResource {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 //existem metodos do RequestMapping, por exemplo o Method que eh usado para definir o verbo/metodo
-	public ResponseEntity<?> find (@PathVariable Integer id)  {
+	public ResponseEntity<CustomerOrder> find (@PathVariable Integer id)  {
 //ResponseEntity tipo especial do Spring que encapsula varias informacoes de resposta HTTP para um servico REST
 //@PathVariable anotacao Spring para capturar o valor recebido no path e setar como argumento do metodo
 		CustomerOrder obj = service.find(id);

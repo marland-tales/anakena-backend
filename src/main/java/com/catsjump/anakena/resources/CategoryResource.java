@@ -26,7 +26,7 @@ public class CategoryResource {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 //existem metodos do RequestMapping, por exemplo o Method que eh usado para definir o verbo/metodo
-	public ResponseEntity<?> find (@PathVariable Integer id)  {
+	public ResponseEntity<Category> find (@PathVariable Integer id)  {
 //ResponseEntity tipo especial do Spring que encapsula varias informacoes de resposta HTTP para um servico REST
 //@PathVariable anotacao Spring para capturar o valor recebido no path e setar como argumento do metodo
 		Category obj = service.find(id);
@@ -43,4 +43,12 @@ public class CategoryResource {
 		return ResponseEntity.created(uri).build();
 	}
 
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Category obj, @PathVariable Integer id) {
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
+	
+	
 }

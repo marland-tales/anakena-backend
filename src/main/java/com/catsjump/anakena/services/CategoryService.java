@@ -26,4 +26,14 @@ public class CategoryService {
 	 obj.setId(null);
 	 return repo.save(obj);
  }
+ 
+ public Category update (Category obj) {
+	 find(obj.getId());
+
+	 return repo.save(obj);
+ }
+/*usando o metodo find o id sera buscado antes de efetuar o update, e caso nao exista, o proprio metodo find gerara a excecao
+ *metodo save do Repository do SpringData serve para inserir e atualizar. A diferenca eh que quando o id esta valendo nulo,
+ * ele insere, e quando o id esta preenchido, ele atualiza
+ * */
 }
