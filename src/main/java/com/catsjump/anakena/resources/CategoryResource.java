@@ -25,24 +25,26 @@ public class CategoryResource {
 	private CategoryService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-//existem metodos do RequestMapping, por exemplo o Method que eh usado para definir o verbo/metodo
 	public ResponseEntity<Category> find (@PathVariable Integer id)  {
-//ResponseEntity tipo especial do Spring que encapsula varias informacoes de resposta HTTP para um servico REST
-//@PathVariable anotacao Spring para capturar o valor recebido no path e setar como argumento do metodo
 		Category obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
+//existem metodos do RequestMapping, por exemplo o Method que eh usado para definir o verbo/metodo
+//ResponseEntity tipo especial do Spring que encapsula varias informacoes de resposta HTTP para um servico REST
+//@PathVariable anotacao Spring para capturar o valor recebido no path e setar como argumento do metodo
+	
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody Category obj) {
 		obj = service.insert(obj);
-//metodo do framework que auxilia no tratamento e geracao da URI que deve ser retornada quando um metodo eh POST
-//grandao, verboso e desajeitado, mas eh o padrao do framework Spring
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-
+//URI eh um metodo do framework que auxilia no tratamento e geracao da URI que deve ser retornada quando um metodo eh POST
+//grandao, verboso e desajeitado, mas eh o padrao do framework Spring
+	
+	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody Category obj, @PathVariable Integer id) {
 		obj.setId(id);
@@ -51,4 +53,9 @@ public class CategoryResource {
 	}
 	
 	
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> delete (@PathVariable Integer id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}	
 }
