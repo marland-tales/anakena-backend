@@ -24,7 +24,7 @@ public class Category implements Serializable{
 //gerencia a referencia - pacote jackson - deve ser feito no lado que deseja que venha os objetos associados
 	@ManyToMany(mappedBy="categories")	
 	private List<Product> products = new ArrayList<>();
-	
+
 	public Category() {
 	}
 
