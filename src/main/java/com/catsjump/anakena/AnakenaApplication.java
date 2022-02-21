@@ -72,6 +72,12 @@ public class AnakenaApplication implements CommandLineRunner {
 //instanciando categorias
 		Category cat1 = new Category(null, "Informatica");
 		Category cat2 = new Category(null, "Escritorio");
+		Category cat3 = new Category(null, "Cama, mesa e banho");
+		Category cat4 = new Category(null, "Esportes");
+		Category cat5 = new Category(null, "Eletronicos");
+		Category cat6 = new Category(null, "Decorcacao");
+		Category cat7 = new Category(null, "Jardinagem");
+		Category cat8 = new Category(null, "Perfumaria");
 	
 //instanciando products
 		Product p1 = new Product(null, "Computador", 2000.00);
@@ -85,7 +91,7 @@ public class AnakenaApplication implements CommandLineRunner {
 		p2.getCategories().addAll(Arrays.asList(cat1, cat2));
 		p3.getCategories().addAll(Arrays.asList(cat1));
 
-		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8));
 		productRepository.saveAll(Arrays.asList(p1, p2, p3));
 
 //instanciando State

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import com.catsjump.anakena.domain.Category;
 
+
+//DTO boa pratica de engenharia de software para tratar isoladamente a manipulacao do objeto
 public class CategoryDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
