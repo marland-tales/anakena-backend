@@ -2,14 +2,21 @@ package com.catsjump.anakena.dto;
 
 import java.io.Serializable;
 
-import com.catsjump.anakena.domain.Category;
+import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Length;
+
+import com.catsjump.anakena.domain.Category;
 
 //DTO boa pratica de engenharia de software para tratar isoladamente a manipulacao do objeto
 public class CategoryDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Length(min=5, max=80, message="O tamanho deve ser entre 5 e 80 caracteres")
+	
 	private String nome;
 	
 	public CategoryDTO () {

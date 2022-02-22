@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.catsjump.anakena.domain.Category;
+import com.catsjump.anakena.dto.CategoryDTO;
 import com.catsjump.anakena.repositories.CategoryRepository;
 import com.catsjump.anakena.services.exceptions.DataIntegrityException;
 import com.catsjump.anakena.services.exceptions.ObjectNotFoundException;
@@ -63,5 +64,10 @@ public class CategoryService {
 	 return repo.findAll(pageRequest);
 }
 //Page eh a anotacao que abstrai informacaoes e dados da paginacao - note que ha uma sobrecarga de metodos no findAll com pageRequest
+ 
+ 
+ public Category fromDTO(CategoryDTO objDTO) {
+	 return new Category(objDTO.getId(), objDTO.getNome());
+ }
  
 }
