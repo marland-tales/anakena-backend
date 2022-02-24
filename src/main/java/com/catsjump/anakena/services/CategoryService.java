@@ -36,7 +36,6 @@ public class CategoryService {
  
  public Category update (Category obj) {
 	 find(obj.getId());
-
 	 return repo.save(obj);
  }
 /*usando o metodo find o id sera buscado antes de efetuar o update, e caso nao exista, o proprio metodo find gerara a excecao
