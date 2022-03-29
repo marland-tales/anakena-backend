@@ -51,6 +51,7 @@ public class Customer implements Serializable {
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
 		this.tipo = (tipo==null) ? null : tipo.getCod();
+//inspecao condicional alternaria para validar se preenchimento dos campos
 	}
 
 	public Integer getId() {

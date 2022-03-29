@@ -35,9 +35,14 @@ public class CategoryService {
  }
  
  public Category update (Category obj) {
-	 find(obj.getId());
-	 return repo.save(obj);
- }
+	 Category newObj = find(obj.getId());
+//instancia o objeto a partir do banco de dados, com isso estara monitorado pelo JPA
+	 updateData(newObj, obj);
+//atualiza o objeto com os dados que foram enviados na requisicao
+	 return repo.save(newObj);
+//persiste no banco de dados
+ 	}
+ 
 /*usando o metodo find o id sera buscado antes de efetuar o update, e caso nao exista, o proprio metodo find gerara a excecao
  *metodo save do Repository do SpringData serve para inserir e atualizar. A diferenca eh que quando o id esta valendo nulo,
  * ele insere, e quando o id esta preenchido, ele atualiza
@@ -66,7 +71,11 @@ public class CategoryService {
  
  
  public Category fromDTO(CategoryDTO objDTO) {
-	 return new Category(objDTO.getId(), objDTO.getNome());
+	 return new Category(objDTO.getId(), objDTO.getName());
  }
+ 
+ private void updateData(Category newObj, Category obj) {
+	 newObj.setName(obj.getName());
+}
  
 }

@@ -17,14 +17,14 @@ public class CategoryDTO implements Serializable {
 	@NotEmpty(message="Preenchimento obrigatório")
 	@Length(min=5, max=80, message="O tamanho deve ser entre 5 e 80 caracteres")
 	
-	private String nome;
+	private String name;
 	
 	public CategoryDTO () {
 	}
 	
 	public CategoryDTO (Category obj) {
 		id = obj.getId();
-		nome = obj.getNome();
+		name = obj.getName();
 	}
 
 	public Integer getId() {
@@ -35,12 +35,12 @@ public class CategoryDTO implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

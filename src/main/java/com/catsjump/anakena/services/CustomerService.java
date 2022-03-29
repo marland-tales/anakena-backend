@@ -31,8 +31,11 @@ public class CustomerService {
 
  public Customer update (Customer obj) {
 	 Customer newObj = find(obj.getId());
+//instancia o objeto a partir do banco de dados, com isso estara monitorado pelo JPA
 	 updateData(newObj, obj);
+//atualiza o objeto com os dados que foram enviados na requisicao
 	 return repo.save(newObj);
+//persiste no banco de dados
  	}
  
  public void delete(Integer id){
@@ -41,7 +44,7 @@ public class CustomerService {
 		  repo.deleteById(id);
 	 }
 	 catch (DataIntegrityViolationException e) {
-		 throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos");
+		 throw new DataIntegrityException("Não é possível excluir um cliente que possua pedidos");
 	}
  }
 
