@@ -9,9 +9,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.catsjump.anakena.domain.Address;
+import com.catsjump.anakena.domain.City;
 import com.catsjump.anakena.domain.Customer;
+import com.catsjump.anakena.domain.enums.TipoCliente;
 import com.catsjump.anakena.dto.CustomerDTO;
+import com.catsjump.anakena.dto.NewCustomerDTO;
+import com.catsjump.anakena.repositories.AddressRepository;
+import com.catsjump.anakena.repositories.CityRepository;
 import com.catsjump.anakena.repositories.CustomerRepository;
 import com.catsjump.anakena.services.exceptions.DataIntegrityException;
 import com.catsjump.anakena.services.exceptions.ObjectNotFoundException;
@@ -22,7 +29,19 @@ public class CustomerService {
  @Autowired
 //anotacao para instanciar automaticamente as instancias declaradas, por injecao de dependencia ou inversao de controle
 	private CustomerRepository repo;
-
+ 
+ @Autowired
+	private AddressRepository addressRepository;
+ 
+ @Transactional
+//neste metodo eh feito um insert em duas tabelas relacionadas entre sim, entao a anotacao transacional garante que a persistencia ocorra numa unica transacao
+ public Customer insert(Customer obj){
+	 obj.setId(null);
+	 obj = repo.save(obj);
+	 addressRepository.saveAll(obj.getAddresses());
+	 return obj;
+ } 
+ 
  public Customer find(Integer id) {
 	 Optional<Customer> obj = repo.findById(id);
 	return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -33,7 +52,7 @@ public class CustomerService {
 	 Customer newObj = find(obj.getId());
 //instancia o objeto a partir do banco de dados, com isso estara monitorado pelo JPA
 	 updateData(newObj, obj);
-//atualiza o objeto com os dados que foram enviados na requisicao
+//atualiza o objeto com os dados que foram recebidos na requisicao
 	 return repo.save(newObj);
 //persiste no banco de dados
  	}
@@ -60,6 +79,25 @@ public class CustomerService {
  
  public Customer fromDTO(CustomerDTO objDTO) {
 	return new Customer(objDTO.getId(), objDTO.getName(), objDTO.getEmail(), null, null);
+ }
+ 
+ public Customer fromDTO(NewCustomerDTO objDTO) {
+//sobrecarga de metodo
+	 Customer ctm = new Customer(null, objDTO.getName(), objDTO.getEmail(), objDTO.getCpfOuCnpj(), TipoCliente.toEnum(objDTO.getTipo()));
+//instanciando cliente
+	 City cit = new City(objDTO.getCityId(), null, null);
+//instanciando cidade para ser usada no endereco
+	 Address adr = new Address(null, objDTO.getLogradouro(), objDTO.getNumero(), objDTO.getComplemento(), objDTO.getBairro(), objDTO.getCep(), ctm, cit);
+//instanciando endereco (para instanciar a cidade eh necessario obter do banco de dados usando o codigo de cidade recebido na entrada no DTO
+	 ctm.getAddresses().add(adr);
+	 ctm.getPhones().add(objDTO.getPhone1());
+	 if (objDTO.getPhone2()!=null) {
+		 ctm.getPhones().add(objDTO.getPhone2());
+	 }
+	 if (objDTO.getPhone3()!=null) {
+		 ctm.getPhones().add(objDTO.getPhone3());
+	 }
+	return ctm;
  }
  
  private void updateData(Customer newObj, Customer obj) {

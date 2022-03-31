@@ -111,7 +111,7 @@ public class AnakenaApplication implements CommandLineRunner {
 		
 		Customer cli1 = new Customer(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
 
-		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+		cli1.getPhones().addAll(Arrays.asList("27363323", "93838393"));
 
 //instanciando Address
 		Address e1 = new Address(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);

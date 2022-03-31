@@ -84,7 +84,7 @@ public class CategoryResource {
 //neste caso foi definido o valor padrao para cada paremtro que faca sentido com o contexto de negocio
 			@RequestParam(value="Page", defaultValue="0") Integer page,
 			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage,
-			@RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
+			@RequestParam(value="orderBy", defaultValue="name") String orderBy, 
 			@RequestParam(value="direction", defaultValue="ASC") String direction) {
 		Page<Category> list = service.findPage(page, linesPerPage, orderBy, direction);
 		Page<CategoryDTO> listDto = list.map(obj -> new CategoryDTO(obj));
