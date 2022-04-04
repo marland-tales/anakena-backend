@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -22,25 +23,26 @@ public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private Integer id;
 	private String name;
 	private String email;
 	private String cpfOuCnpj;
 	private Integer tipo;
 
-	@OneToMany(mappedBy="customer")
+	@OneToMany(mappedBy = "customer", cascade=CascadeType.ALL)
+//cascade = JPA aplica a regra de relacionamento -  operacao que afetar o cliente afetara tambem o endereco
 	private List<Address> addresses = new ArrayList<>();
 
 	@ElementCollection
-	@CollectionTable(name="TELEFONE")
+	@CollectionTable(name = "TELEFONE")
 	private Set<String> phones = new HashSet<>();
 
 	@JsonBackReference
-	@OneToMany(mappedBy="customer")
+	@OneToMany(mappedBy = "customer")
 	private List<CustomerOrder> pedidos = new ArrayList<>();
-	
+
 	public Customer() {
 	}
 
@@ -50,7 +52,7 @@ public class Customer implements Serializable {
 		this.name = name;
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
-		this.tipo = (tipo==null) ? null : tipo.getCod();
+		this.tipo = (tipo == null) ? null : tipo.getCod();
 //inspecao condicional alternaria para validar se preenchimento dos campos
 	}
 
@@ -117,8 +119,7 @@ public class Customer implements Serializable {
 	public void setPedidos(List<CustomerOrder> pedidos) {
 		this.pedidos = pedidos;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -143,7 +144,5 @@ public class Customer implements Serializable {
 			return false;
 		return true;
 	}
-
-
 
 }
