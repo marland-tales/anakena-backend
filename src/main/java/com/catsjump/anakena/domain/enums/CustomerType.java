@@ -1,6 +1,6 @@
 package com.catsjump.anakena.domain.enums;
 
-public enum TipoCliente {
+public enum CustomerType {
 	
 	PESSOAFISICA(1, "Pessoa Física"),
 	PESSOAJURIDICA(2, "Pessoa Jurídica");
@@ -8,7 +8,7 @@ public enum TipoCliente {
 	private int cod;
 	private String descricao;
 
-	private TipoCliente(int cod, String descricao) {
+	private CustomerType(int cod, String descricao) {
 	 this.cod = cod;
 	 this.descricao = descricao;
 	 }
@@ -20,14 +20,14 @@ public enum TipoCliente {
 	 return descricao;
 	 }
 	
-	public static TipoCliente toEnum(Integer id) {
+	public static CustomerType toEnum(Integer id) {
 //static eh uma operacao possivel de ser instanciada sem executar objetos
 	
 	 if (id == null) {
 		 return null;
 	 }
 	
-	 for (TipoCliente x : TipoCliente.values()) {
+	 for (CustomerType x : CustomerType.values()) {
 		 if (id.equals(x.getCod())) {
 			 return x;
 	 }

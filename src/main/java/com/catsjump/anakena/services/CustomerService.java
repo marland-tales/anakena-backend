@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.catsjump.anakena.domain.Address;
 import com.catsjump.anakena.domain.City;
 import com.catsjump.anakena.domain.Customer;
-import com.catsjump.anakena.domain.enums.TipoCliente;
+import com.catsjump.anakena.domain.enums.CustomerType;
 import com.catsjump.anakena.dto.CustomerDTO;
 import com.catsjump.anakena.dto.NewCustomerDTO;
 import com.catsjump.anakena.repositories.AddressRepository;
@@ -82,7 +82,7 @@ public class CustomerService {
 	public Customer fromDTO(NewCustomerDTO objDTO) {
 //sobrecarga de metodo
 		Customer ctm = new Customer(null, objDTO.getName(), objDTO.getEmail(), objDTO.getCpfOuCnpj(),
-				TipoCliente.toEnum(objDTO.getTipo()));
+				CustomerType.toEnum(objDTO.getTipo()));
 //instanciando cliente
 		City cit = new City(objDTO.getCityId(), null, null);
 //instanciando cidade para ser usada no endereco

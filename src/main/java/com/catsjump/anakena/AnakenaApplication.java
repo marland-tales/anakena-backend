@@ -20,7 +20,7 @@ import com.catsjump.anakena.domain.Product;
 import com.catsjump.anakena.domain.SlipPayment;
 import com.catsjump.anakena.domain.State;
 import com.catsjump.anakena.domain.enums.PaymentStatus;
-import com.catsjump.anakena.domain.enums.TipoCliente;
+import com.catsjump.anakena.domain.enums.CustomerType;
 import com.catsjump.anakena.repositories.AddressRepository;
 import com.catsjump.anakena.repositories.CategoryRepository;
 import com.catsjump.anakena.repositories.CityRepository;
@@ -108,7 +108,7 @@ public class AnakenaApplication implements CommandLineRunner {
 		stateRepository.saveAll(Arrays.asList(est1, est2));
 		cityRepository.saveAll(Arrays.asList(c1, c2, c3));
 
-		Customer cli1 = new Customer(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
+		Customer cli1 = new Customer(null, "Maria Silva", "maria@gmail.com", "36378912377", CustomerType.PESSOAFISICA);
 
 		cli1.getPhones().addAll(Arrays.asList("27363323", "93838393"));
 

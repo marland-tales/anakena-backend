@@ -15,7 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.catsjump.anakena.domain.enums.TipoCliente;
+import com.catsjump.anakena.domain.enums.CustomerType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
@@ -29,7 +29,7 @@ public class Customer implements Serializable {
 	private String name;
 	private String email;
 	private String cpfOuCnpj;
-	private Integer tipo;
+	private Integer type;
 
 	@OneToMany(mappedBy = "customer", cascade=CascadeType.ALL)
 //cascade = JPA aplica a regra de relacionamento -  operacao que afetar o cliente afetara tambem o endereco
@@ -46,13 +46,13 @@ public class Customer implements Serializable {
 	public Customer() {
 	}
 
-	public Customer(Integer id, String name, String email, String cpfOuCnpj, TipoCliente tipo) {
+	public Customer(Integer id, String name, String email, String cpfOuCnpj, CustomerType type) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
-		this.tipo = (tipo == null) ? null : tipo.getCod();
+		this.type = (type == null) ? null : type.getCod();
 //inspecao condicional alternaria para validar se preenchimento dos campos
 	}
 
@@ -88,12 +88,12 @@ public class Customer implements Serializable {
 		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
-	public TipoCliente getTipo() {
-		return TipoCliente.toEnum(tipo);
+	public CustomerType getTipo() {
+		return CustomerType.toEnum(type);
 	}
 
-	public void setTipo(TipoCliente tipo) {
-		this.tipo = tipo.getCod();
+	public void setTipo(CustomerType type) {
+		this.type = type.getCod();
 	}
 
 	public List<Address> getAddresses() {
