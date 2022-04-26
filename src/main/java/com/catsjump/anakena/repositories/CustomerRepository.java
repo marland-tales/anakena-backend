@@ -15,5 +15,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 //indicando como nao transacional, diminui o lockIn no DB e performa a aplicacao
 	
 	Customer findByEmail(String email);
+//usando findByEmail, constroe-se o metodo a partir da implementacao do framework, desta forma as consultas JPQL são geradas automaticamente
 	
 }
