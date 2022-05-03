@@ -8,11 +8,14 @@ import java.util.List;
 public class URL {
 
 	public static String decodeParam(String s) {
+//metodo para desencoda um paramentro recebido - o parametro pode ser uma string contendo um nome com espaco, por exemplo
 		try {
 			return URLDecoder.decode(s, "UTF-8");
+//funcao do java para desencoda uma string
 		} 
 		catch (UnsupportedEncodingException e) {
 			return "";
+//catch tratando excecao na funcao java URLDecoder e returnando uma string vazia ""
 		}
 	}	
 
