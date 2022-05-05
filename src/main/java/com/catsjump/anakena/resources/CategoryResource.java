@@ -82,7 +82,7 @@ public class CategoryResource {
 	public ResponseEntity<Page<CategoryDTO>> findPage (
 //RequestParam eh utilizada para tratamento de path parameters abstraindo e facilitando a manipulacao
 //neste caso foi definido o valor padrao para cada paremtro que faca sentido com o contexto de negocio
-			@RequestParam(value="Page", defaultValue="0") Integer page,
+			@RequestParam(value="page", defaultValue="0") Integer page,
 			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage,
 			@RequestParam(value="orderBy", defaultValue="name") String orderBy, 
 			@RequestParam(value="direction", defaultValue="ASC") String direction) {
