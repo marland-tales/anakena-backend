@@ -16,21 +16,26 @@ public class OrderItem implements Serializable {
 	private OrderItemPK id = new OrderItemPK();
 
 	private Double discount;
-	private Integer quantidade;
-	private Double amount;
+	private Integer quantity;
+	private Double price;
 
 	public OrderItem() {
 	}
 
-	public OrderItem(CustomerOrder customerOrder, Product product, Double discount, Integer quantidade, Double amount) {
+	public OrderItem(CustomerOrder customerOrder, Product product, Double discount, Integer quantity, Double price) {
 		super();
 		id.setCustomerOrder(customerOrder);
 		id.setProduct(product);
 		this.discount = discount;
-		this.quantidade = quantidade;
-		this.amount = amount;
+		this.quantity = quantity;
+		this.price = price;
 	}
 
+	public double getSubTotal() {
+		return (price - discount) * quantity;
+	}
+	
+	
 	@JsonIgnore
 	public CustomerOrder getCustomerOrder() {
 		return id.getCustomerOrder();
@@ -57,19 +62,19 @@ public class OrderItem implements Serializable {
 	}
 
 	public Integer getQuantidade() {
-		return quantidade;
+		return quantity;
 	}
 
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
+	public void setQuantidade(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	public Double getPreco() {
-		return amount;
+		return price;
 	}
 
-	public void setPreco(Double amount) {
-		this.amount = amount;
+	public void setPreco(Double price) {
+		this.price = price;
 	}
 
 	@Override
