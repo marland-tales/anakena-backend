@@ -18,11 +18,11 @@ public class Address implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String logradouro;
-	private String numero;
-	private String complemento;
-	private String bairro;
-	private String cep;
+	private String street;
+	private String number;
+	private String comments;
+	private String district;
+	private String zipCode;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -36,15 +36,15 @@ public class Address implements Serializable {
 	public Address() {
 	}
 
-	public Address(Integer id, String logradouro, String numero, String complemento, String bairro, String cep,
+	public Address(Integer id, String street, String number, String comments, String district, String zipCode,
 			Customer customer, City city) {
 		super();
 		this.id = id;
-		this.logradouro = logradouro;
-		this.numero = numero;
-		this.complemento = complemento;
-		this.bairro = bairro;
-		this.cep = cep;
+		this.street = street;
+		this.number = number;
+		this.comments = comments;
+		this.district = district;
+		this.zipCode = zipCode;
 		this.customer = customer;
 		this.setCity(city);
 	}
@@ -57,44 +57,44 @@ public class Address implements Serializable {
 		this.id = id;
 	}
 
-	public String getLogradouro() {
-		return logradouro;
+	public String getStreet() {
+		return street;
 	}
 
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
-	public String getNumero() {
-		return numero;
+	public String getNumber() {
+		return number;
 	}
 
-	public void setNumero(String numero) {
-		this.numero = numero;
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
-	public String getComplemento() {
-		return complemento;
+	public String getComments() {
+		return comments;
 	}
 
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 
-	public String getBairro() {
-		return bairro;
+	public String getDistrict() {
+		return district;
 	}
 
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 
-	public String getCep() {
-		return cep;
+	public String getZipCode() {
+		return zipCode;
 	}
 
-	public void setCep(String cep) {
-		this.cep = cep;
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
 
 	public Customer getCustomer() {

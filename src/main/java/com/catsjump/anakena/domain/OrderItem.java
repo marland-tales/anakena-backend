@@ -41,8 +41,17 @@ public class OrderItem implements Serializable {
 		return id.getCustomerOrder();
 	}
 
+	
+	public void setCustomerOrder(CustomerOrder customerOrder) {
+		id.setCustomerOrder(customerOrder);
+	}
+	
 	public Product getProduct() {
 		return id.getProduct();
+	}
+	
+	public void setProduct (Product product) {
+		id.setProduct(product);
 	}
 
 	public OrderItemPK getId() {
@@ -61,19 +70,19 @@ public class OrderItem implements Serializable {
 		this.discount = discount;
 	}
 
-	public Integer getQuantidade() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantidade(Integer quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
-	public Double getPreco() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPreco(Double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 

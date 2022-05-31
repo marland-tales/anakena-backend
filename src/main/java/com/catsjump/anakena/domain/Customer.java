@@ -41,12 +41,12 @@ public class Customer implements Serializable {
 	private List<Address> addresses = new ArrayList<>();
 
 	@ElementCollection
-	@CollectionTable(name = "TELEFONE")
+	@CollectionTable(name = "phone")
 	private Set<String> phones = new HashSet<>();
 
 	@JsonBackReference
 	@OneToMany(mappedBy = "customer")
-	private List<CustomerOrder> pedidos = new ArrayList<>();
+	private List<CustomerOrder> customerOrder = new ArrayList<>();
 
 	public Customer() {
 	}
@@ -117,12 +117,12 @@ public class Customer implements Serializable {
 		this.phones = phones;
 	}
 
-	public List<CustomerOrder> getPedidos() {
-		return pedidos;
+	public List<CustomerOrder> getCustomerOrder() {
+		return customerOrder;
 	}
 
-	public void setPedidos(List<CustomerOrder> pedidos) {
-		this.pedidos = pedidos;
+	public void setCustomerOrder(List<CustomerOrder> customerOrder) {
+		this.customerOrder = customerOrder;
 	}
 
 	@Override

@@ -12,10 +12,15 @@ import javax.persistence.OneToOne;
 
 import com.catsjump.anakena.domain.enums.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 //abstract garante que nao seja possivel instanciar diretamente objetos do tipo Pagamento, obriga que seja criado a partir da subclasses, por exemplo: Pagamento pagto1 = new PagamentoComCartao
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
+//anotacao do pacote jackson usada para serializar e deserializar o json
+
 public abstract class Payment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -25,19 +30,19 @@ public abstract class Payment implements Serializable {
 
 	@JsonBackReference
 	@OneToOne
-	@JoinColumn(name="pedido_id")
+	@JoinColumn(name="customer_order_id")
 	@MapsId
-//mapeamento do atributo pedido referenciando que o Id do Pagamento assume o Id do Pedido - usando @OneToOne, @joinColumn e @MapsId 
+//mapeamento do atributo pedido referenciando que o Id do Pagamento assume o Id do CustomerOrder - usando @OneToOne, @joinColumn e @MapsId 
 	private CustomerOrder customerOrder;
 
 	public Payment() {
 	}
 
-	public Payment(Integer id, PaymentStatus status, CustomerOrder pedido) {
+	public Payment(Integer id, PaymentStatus status, CustomerOrder customerOrder) {
 		super();
 		this.id = id;
 		this.status = (status==null) ? null : status.getCod();
-		this.customerOrder = pedido;
+		this.customerOrder = customerOrder;
 	}
 
 	public Integer getId() {
@@ -48,11 +53,11 @@ public abstract class Payment implements Serializable {
 		this.id = id;
 	}
 
-	public PaymentStatus getEstado() {
+	public PaymentStatus getStatus() {
 		return PaymentStatus.toEnum(status);
 	}
 
-	public void setEstado(PaymentStatus status) {
+	public void setStatus(PaymentStatus status) {
 		this.status = status.getCod();
 	}
 
@@ -60,7 +65,7 @@ public abstract class Payment implements Serializable {
 		return customerOrder;
 	}
 
-	public void setPedido(CustomerOrder customerOrder) {
+	public void setCustomerOrder(CustomerOrder customerOrder) {
 		this.customerOrder = customerOrder;
 	}
 
@@ -88,7 +93,4 @@ public abstract class Payment implements Serializable {
 			return false;
 		return true;
 	}
-
-
-
 }

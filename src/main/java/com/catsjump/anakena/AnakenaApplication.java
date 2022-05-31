@@ -19,8 +19,8 @@ import com.catsjump.anakena.domain.Payment;
 import com.catsjump.anakena.domain.Product;
 import com.catsjump.anakena.domain.SlipPayment;
 import com.catsjump.anakena.domain.State;
-import com.catsjump.anakena.domain.enums.PaymentStatus;
 import com.catsjump.anakena.domain.enums.CustomerType;
+import com.catsjump.anakena.domain.enums.PaymentStatus;
 import com.catsjump.anakena.repositories.AddressRepository;
 import com.catsjump.anakena.repositories.CategoryRepository;
 import com.catsjump.anakena.repositories.CityRepository;
@@ -47,13 +47,13 @@ public class AnakenaApplication implements CommandLineRunner {
 	private CityRepository cityRepository;
 
 	@Autowired
-	private CustomerRepository clienteRepository;
+	private CustomerRepository customerRepository;
 
 	@Autowired
 	private AddressRepository addressRepository;
 
 	@Autowired
-	private CustomerOrderRepository pedidoRepository;
+	private CustomerOrderRepository customerOrderRepository;
 
 	@Autowired
 	private PaymentRepository paymentRepository;
@@ -141,7 +141,7 @@ public class AnakenaApplication implements CommandLineRunner {
 
 		cli1.getAddresses().addAll(Arrays.asList(e1, e2));
 
-		clienteRepository.saveAll(Arrays.asList(cli1));
+		customerRepository.saveAll(Arrays.asList(cli1));
 		addressRepository.saveAll(Arrays.asList(e1, e2));
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy HH:mm");
@@ -156,9 +156,9 @@ public class AnakenaApplication implements CommandLineRunner {
 		Payment pagto2 = new SlipPayment(null, PaymentStatus.PENDENTE, ped2, sdf.parse("20/10/2017 00:00"), null);
 		ped2.setPayment(pagto2);
 
-		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+		cli1.getCustomerOrder().addAll(Arrays.asList(ped1, ped2));
 
-		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
+		customerOrderRepository.saveAll(Arrays.asList(ped1, ped2));
 		paymentRepository.saveAll(Arrays.asList(pagto1, pagto2));
 //
 

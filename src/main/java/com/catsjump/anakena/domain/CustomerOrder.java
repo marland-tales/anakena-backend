@@ -26,7 +26,7 @@ public class CustomerOrder implements Serializable {
 	private Integer id;
 	
 	@JsonFormat(pattern="dd/mm/yyyy hh:mm")
-	private Date instante;
+	private Date instant;
 
 //	@JsonManagedReference
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="customerOrder")
@@ -35,12 +35,12 @@ public class CustomerOrder implements Serializable {
 
 //	@JsonManagedReference
 	@ManyToOne
-	@JoinColumn(name="cliente_id")
+	@JoinColumn(name="customer_id")
 	private Customer customer;
 //@manyToOne permite determinar o tipo de relacionamento e @JoinColumns determina a FK 
 
 	@ManyToOne
-	@JoinColumn(name="endereco_de_entrega_id")
+	@JoinColumn(name="delivery_address_id")
 	private Address deliveryAddress;
 	
 	@OneToMany(mappedBy="id.customerOrder")
@@ -49,10 +49,10 @@ public class CustomerOrder implements Serializable {
 	public CustomerOrder() {
 	}
 
-	public CustomerOrder(Integer id, Date instante, Customer customer, Address deliveryAddress) {
+	public CustomerOrder(Integer id, Date instant, Customer customer, Address deliveryAddress) {
 		super();
 		this.id = id;
-		this.instante = instante;
+		this.instant = instant;
 		this.customer = customer;
 		this.deliveryAddress = deliveryAddress;
 	}
@@ -74,12 +74,12 @@ public class CustomerOrder implements Serializable {
 		this.id = id;
 	}
 
-	public Date getInstante() {
-		return instante;
+	public Date getInstant() {
+		return instant;
 	}
 
-	public void setInstante(Date instante) {
-		this.instante = instante;
+	public void setInstant(Date instant) {
+		this.instant = instant;
 	}
 
 	public Payment getPayment() {
@@ -90,11 +90,11 @@ public class CustomerOrder implements Serializable {
 		this.payment = payment;
 	}
 
-	public Customer getCliente() {
+	public Customer getCustomer() {
 		return customer;
 	}
 
-	public void setCliente(Customer customer) {
+	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 
